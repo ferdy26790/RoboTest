@@ -107,6 +107,7 @@ const Robo = (state=initialRoboState, action) => {
           return state
         } 
       }
+      break;
     default:
       return state
    }

@@ -11,6 +11,9 @@ class GridController extends Component {
       
     }
   }
+  checkState = () => {
+    
+  }
   render() {
     if (this.state.rows > 0 && !this.state.validStart) {
       this.setState({
@@ -36,7 +39,13 @@ class GridController extends Component {
                 +
               </button>
               <button
-                onClick={() => this.setState({ rows: this.state.rows - 1 })}
+                onClick={() => {
+                  if(this.state.rows - 1 < 0) {
+                    alert('has reached minimum value')
+                  } else {
+                    this.setState({ rows: this.state.rows - 1 })
+                  }
+                }}
               >
                 -
               </button>
@@ -50,7 +59,13 @@ class GridController extends Component {
                 +
               </button>
               <button
-                onClick={() => this.setState({ columns: this.state.columns - 1 })}
+                onClick={() => {
+                  if(this.state.columns - 1 < 0) {
+                    alert('has reached minimum value')
+                  } else {
+                    this.setState({ columns: this.state.columns - 1 })
+                  }
+                }}
               >
                 -
               </button>

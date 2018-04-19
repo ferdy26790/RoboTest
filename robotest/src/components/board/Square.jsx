@@ -25,7 +25,7 @@ class Square extends Component {
       <div style={squareStyles}>
         {
           this.props.robo.roboCurrentPosition === this.state.cord ?
-          <img style={squareRoboStyles} src={this.state[this.props.robo.roboDirection]} />
+          <img style={squareRoboStyles} src={this.state[this.props.robo.roboDirection]} alt="robo" />
           :
           <p></p>
         }
