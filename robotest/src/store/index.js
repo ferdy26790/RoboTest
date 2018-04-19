@@ -12,7 +12,7 @@ const initialBoardState = {
 }
 
 const initialRoboState = {
-  roboLog: [],
+  roboLogs: [],
   validMove: [],
   roboDirection: null,
   roboCurrentPosition: null
@@ -42,10 +42,17 @@ const Board = (state=initialBoardState, action) => {
 const Robo = (state=initialRoboState, action) => {
   switch (action.type) {
     case 'PLACE' :
+    let roboLog = {
+      action: 'PLACE',
+      value: '0,0,EAST',
+      creator: 'ferdy26790@gmail.com'
+    }
+    let newLogs = [roboLog]
       return {
         ...state,
         roboCurrentPosition: '00',
-        roboDirection: 'right'
+        roboDirection: 'right',
+        roboLog: newLogs
       }
     case 'VALIDMOVE' : {
       let newState = {...state}
@@ -68,6 +75,13 @@ const Robo = (state=initialRoboState, action) => {
         currentPos[1] = cordMove.toString()
         if (newState.validMove.indexOf(currentPos.join('')) !== -1) {
           newState.roboCurrentPosition = currentPos.join('')
+          let valueLog = [...currentPos, 'EAST']
+          let newLog = {
+            action: 'MOVE',
+            value: valueLog,
+            creator: 'ferdy26790@gmail.com'
+          }
+          newState.roboLog.push(newLog)
           return newState
         } else {
           alert('invalid move')
@@ -79,6 +93,13 @@ const Robo = (state=initialRoboState, action) => {
         currentPos[1] = cordMove.toString()
         if (newState.validMove.indexOf(currentPos.join('')) !== -1) {
           newState.roboCurrentPosition = currentPos.join('')
+          let valueLog = [...currentPos, 'WEST']
+          let newLog = {
+            action: 'MOVE',
+            value: valueLog,
+            creator: 'ferdy26790@gmail.com'
+          }
+          newState.roboLog.push(newLog)
           return newState
         } else {
           alert('invalid move')
@@ -90,6 +111,13 @@ const Robo = (state=initialRoboState, action) => {
         currentPos[0] = cordMove.toString()
         if (newState.validMove.indexOf(currentPos.join('')) !== -1) {
           newState.roboCurrentPosition = currentPos.join('')
+          let valueLog = [...currentPos, 'NORTH']
+          let newLog = {
+            action: 'MOVE',
+            value: valueLog,
+            creator: 'ferdy26790@gmail.com'
+          }
+          newState.roboLog.push(newLog)
           return newState
         } else {
           alert('invalid move')
@@ -101,6 +129,13 @@ const Robo = (state=initialRoboState, action) => {
         currentPos[0] = cordMove.toString()
         if (newState.validMove.indexOf(currentPos.join('')) !== -1) {
           newState.roboCurrentPosition = currentPos.join('')
+          let valueLog = [...currentPos, 'SOUTH']
+          let newLog = {
+            action: 'MOVE',
+            value: valueLog,
+            creator: 'ferdy26790@gmail.com'
+          }
+          newState.roboLog.push(newLog)
           return newState
         } else {
           alert('invalid move')
