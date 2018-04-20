@@ -4,8 +4,8 @@ class GridController extends Component {
   constructor(){
     super()
     this.state = {
-      rows: 0,
-      columns: 0,
+      rows: 10,
+      columns: 5,
       validStart: false,
       isPlaced: false
       
@@ -26,7 +26,7 @@ class GridController extends Component {
     }
     let msgValid =  ''
     if ( !this.state.rows ) {
-      msgValid = 'please enter a valid grid'
+      msgValid = 'please enter a unit x unit valid grid'
     }
     return (
       <div>
@@ -34,7 +34,13 @@ class GridController extends Component {
           <div>
             <p> Rows: {this.state.rows} 
               <button
-                onClick={() => this.setState({ rows: this.state.rows + 1 })}
+                onClick={() => {
+                  if(this.state.rows + 1 >= 11) {
+                    alert('has reached maximum value')
+                  } else {
+                    this.setState({ rows: this.state.rows + 1 })
+                  }
+                }}
               >
                 +
               </button>
@@ -54,7 +60,13 @@ class GridController extends Component {
           <div>
             <p> Columns: {this.state.columns} 
               <button
-              onClick={() => this.setState({ columns: this.state.columns + 1 })}
+                onClick={() => {
+                  if(this.state.columns + 1 >= 11) {
+                    alert('has reached maximum value')
+                  } else {
+                    this.setState({ columns: this.state.columns + 1 })
+                  }
+                }}
               >
                 +
               </button>

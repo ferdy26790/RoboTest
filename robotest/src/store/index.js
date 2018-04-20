@@ -1,6 +1,4 @@
 import { createStore, combineReducers } from 'redux'
-
-
 const initialBoardState = {
   rows: [],
   columns: [],
@@ -12,7 +10,7 @@ const initialBoardState = {
 }
 
 const initialRoboState = {
-  roboLogs: [],
+  roboLog: [],
   validMove: [],
   roboDirection: null,
   roboCurrentPosition: null
@@ -42,17 +40,28 @@ const Board = (state=initialBoardState, action) => {
 const Robo = (state=initialRoboState, action) => {
   switch (action.type) {
     case 'PLACE' :
-    let roboLog = {
-      action: 'PLACE',
-      value: '0,0,EAST',
-      creator: 'ferdy26790@gmail.com'
-    }
-    let newLogs = [roboLog]
+      let roboLog = {
+        action: 'PLACE',
+        value: '0,0,EAST',
+        creator: 'ferdy26790@gmail.com'
+      }
+      let newLogs = [roboLog]
       return {
         ...state,
         roboCurrentPosition: '00',
         roboDirection: 'right',
         roboLog: newLogs
+      }
+    case 'NEWPLACE' :
+      return {
+        ...state,
+        roboCurrentPosition: '00',
+        roboDirection: 'right',
+        roboLog: [{
+          action: 'PLACE',
+          value: '0,0,EAST',
+          creator: 'ferdy26790@gmail.com'
+        }]
       }
     case 'VALIDMOVE' : {
       let newState = {...state}

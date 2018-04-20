@@ -14,6 +14,29 @@ class Controller extends Component {
       ready: true
     })
   }
+  handleSave = () => {
+    let jsonLog = JSON.stringify(this.props.robo.roboLog)
+    fetch('https://test.interaktiv.sg/robot-test/', 
+    {
+      body: jsonLog,
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'test-robot-interaktiv',
+        'email': 'ferdy26790@gmail.com'
+      },
+      method: 'POST', 
+      mode: 'cors', 
+    })
+      .then(response => {
+        console.log(response)
+        alert('saved')
+      })
+      .catch(err => {
+        console.log(err)
+        alert('something wrong while save')
+      })
+  }
   render() {
     return (
       <div>
@@ -55,11 +78,28 @@ class Controller extends Component {
                   </button>
                 </div> 
                 <br/>
-                <button
-                  onClick={() => this.props.moveRobo()}>
-                  Move
-                </button>
+                <div>
+                  <button
+                    onClick={() => this.props.moveRobo()}>
+                    Move
+                  </button>
+                </div>
+                <br/>
+                <div>
+                  <button
+                    onClick={() => this.handleSave()}>
+                    Save
+                  </button>
+                </div>
+                <br/>
+                <div>
+                  <button
+                    onClick={() => this.props.newPlace()}>
+                    Place
+                  </button>
+                </div>
               </div>
+
             :
               <div>
                 <button
@@ -80,7 +120,11 @@ class Controller extends Component {
     );
   }
 }
-
+const mapStateToProps = (state) => {
+  return {
+    robo: state.Robo
+  }
+}
 const mapDispatchToProps = (dispatch) => ({
   initialPlace: () => dispatch({
     type: 'PLACE'
@@ -91,7 +135,10 @@ const mapDispatchToProps = (dispatch) => ({
   }) ,
   moveRobo: () => dispatch({
     type: 'MOVE'
+  }),
+  newPlace: () => dispatch({
+    type: 'NEWPLACE'
   })
 })
 
-export default connect(null, mapDispatchToProps)(Controller);
+export default connect(mapStateToProps, mapDispatchToProps)(Controller);
